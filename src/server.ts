@@ -1,15 +1,14 @@
-import http from "http";
+import "dotenv/config";
 import cors from "cors";
-import dotenv from "dotenv";
 import express from "express";
 import mongoose from "mongoose";
-import bodyParser from "body-parser";
 import compression from "compression";
 import cookieParser from "cookie-parser";
 
-dotenv.config();
-
-import router from "./router/router.js";
+import authenticationRouter from "./router/authencation.router.js";
+import userRouter from "./router/users.router.js";
+import { env } from "./config/env.js";
+import { requireAuth } from "./middlewares/middleware.js";
 
 const app = express();
 
@@ -20,22 +19,14 @@ app.use(
 );
 app.use(compression());
 app.use(cookieParser());
-app.use(bodyParser.json());
+app.use(express.json());
 
-const server = http.createServer(app);
-
-server.listen(8080, () => {
-  console.log("server is running on http://localhost:8080");
-});
-
-const MONGO_URL = process.env["MONGO_URL"];
-
-if (!MONGO_URL) {
-  throw new Error("Where is The Mongo Url");
-}
-
-mongoose.Promise = global.Promise;
-mongoose.connect(MONGO_URL);
+mongoose.connect(env.MONGO_URL);
 mongoose.connection.on("error", (error: Error) => console.log(error));
 
-app.use("/", router());
+app.use("/api/auth", authenticationRouter);
+app.use("/api/me", requireAuth, userRouter);
+
+app.listen(env.PORT, () => {
+  console.log("running on http://localhost:8080");
+});

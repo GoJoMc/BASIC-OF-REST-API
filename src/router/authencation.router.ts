@@ -1,8 +1,15 @@
-import type { Router } from "express";
+import express from "express";
 
-import { register, login } from "../controllers/authentication.controller.js";
+import {
+  register,
+  login,
+  logout,
+} from "../controllers/authentication.controller.js";
 
-export default (router: Router) => {
-  router.post("/auth/register", register);
-  router.post("/auth/login", login)
-};
+const router = express.Router();
+
+router.post("/register", register);
+router.post("/login", login);
+router.post("/logout", logout);
+
+export default router;
