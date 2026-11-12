@@ -291,7 +291,6 @@ The access token and its cookie both expire after **30 minutes**.
 This project is still a learning project and is **not production-ready**.
 
 - CORS currently enables credentials without defining an explicit allowed origin.
-- Email and username uniqueness are checked in application code, but unique database indexes are not defined in the schema.
 - Input validation is basic; there is no dedicated validation layer.
 - Error responses are inconsistent: some use an `error` key, others use `message`.
 - Logout clears the browser cookie, but does not revoke an already-issued JWT. The token remains valid until it expires.
