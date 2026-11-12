@@ -252,7 +252,7 @@ The access token and its cookie both expire after **30 minutes**.
 │   │   └── env.ts
 │   ├── controllers/
 │   │   ├── authentication.controller.ts
-│   │   └── users.controller.ts      # legacy, not used by any router
+│   │   └── users.controller.ts
 │   ├── db/
 │   │   └── users.ts
 │   ├── helpers/
@@ -291,7 +291,6 @@ The access token and its cookie both expire after **30 minutes**.
 This project is still a learning project and is **not production-ready**.
 
 - CORS currently enables credentials without defining an explicit allowed origin.
-- MongoDB connection is started without awaiting its completion before the server begins listening.
 - Email and username uniqueness are checked in application code, but unique database indexes are not defined in the schema.
 - Input validation is basic; there is no dedicated validation layer.
 - Error responses are inconsistent: some use an `error` key, others use `message`.

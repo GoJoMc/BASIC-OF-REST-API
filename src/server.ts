@@ -21,7 +21,7 @@ app.use(compression());
 app.use(cookieParser());
 app.use(express.json());
 
-mongoose.connect(env.MONGO_URL);
+await mongoose.connect(env.MONGO_URL);
 mongoose.connection.on("error", (error: Error) => console.log(error));
 
 app.use("/api/auth", authenticationRouter);
