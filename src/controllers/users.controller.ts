@@ -71,12 +71,12 @@ export const updateUsername = async (req: Request, res: Response) => {
     }
 
     if (typeof username !== "string" || username.trim() === "") {
-      return res.status(400).json({ error: "Missing required fields" });
+      return res.status(400).json({ message: "Missing required fields" });
     }
 
     const existingUsername = await getUserByUsername(username.trim());
     if (existingUsername && existingUsername._id.toString() !== userId) {
-      return res.status(409).json({ error: "Username already exists" });
+      return res.status(409).json({ message: "Username already exists" });
     }
 
     const userUpdated = await updateUserById(userId, {
@@ -105,7 +105,7 @@ export const updateEmail = async (req: Request, res: Response) => {
     }
 
     if (typeof email !== "string" || email.trim() === "") {
-      return res.status(400).json({ error: "Missing required fields" });
+      return res.status(400).json({ message: "Missing required fields" });
     }
 
     const existingEmail = await getUserByEmail(email.trim());
@@ -148,7 +148,7 @@ export const updatePassword = async (req: Request, res: Response) => {
       typeof oldPassword !== "string" ||
       oldPassword.trim() === ""
     ) {
-      return res.status(400).json({ error: "Missing required fields" });
+      return res.status(400).json({ message: "Missing required fields" });
     }
 
     const user = await getUserById(userId).select("+authentication.password");

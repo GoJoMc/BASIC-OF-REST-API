@@ -1,5 +1,4 @@
 import "dotenv/config";
-import cors from "cors";
 import express from "express";
 import mongoose from "mongoose";
 import compression from "compression";
@@ -12,11 +11,6 @@ import { requireAuth } from "./middlewares/middleware.js";
 
 const app = express();
 
-app.use(
-  cors({
-    credentials: true,
-  }),
-);
 app.use(compression());
 app.use(cookieParser());
 app.use(express.json());
@@ -28,5 +22,5 @@ app.use("/api/auth", authenticationRouter);
 app.use("/api/me", requireAuth, userRouter);
 
 app.listen(env.PORT, () => {
-  console.log("running on http://localhost:8080");
+  console.log(`running on http://localhost:${env.PORT}`);
 });

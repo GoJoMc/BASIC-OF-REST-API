@@ -87,16 +87,16 @@ export const register = async (req: Request, res: Response) => {
       typeof username !== "string" ||
       username.trim() === ""
     ) {
-      return res.status(400).json({ error: "Missing required fields" });
+      return res.status(400).json({ message: "Missing required fields" });
     }
     const existingEmail = await getUserByEmail(email.trim());
     const existingUsername = await getUserByUsername(username.trim());
 
     if (existingEmail) {
-      return res.status(409).json({ error: "Email already exists" });
+      return res.status(409).json({ message: "Email already exists" });
     }
     if (existingUsername) {
-      return res.status(409).json({ error: "Username already exists" });
+      return res.status(409).json({ message: "Username already exists" });
     }
 
     const hashedPassword = await argon2.hash(password);

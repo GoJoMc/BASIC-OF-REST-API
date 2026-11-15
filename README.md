@@ -290,22 +290,13 @@ The access token and its cookie both expire after **30 minutes**.
 
 This project is still a learning project and is **not production-ready**.
 
-- CORS currently enables credentials without defining an explicit allowed origin.
 - Input validation is basic; there is no dedicated validation layer.
-- Error responses are inconsistent: some use an `error` key, others use `message`.
 - Logout clears the browser cookie, but does not revoke an already-issued JWT. The token remains valid until it expires.
 - There is no refresh-token mechanism.
-- The startup log always prints `http://localhost:8080`, even when `PORT` is set to something else.
-- The `main` field in `package.json` points to `build/server.js`, while the TypeScript compiler outputs to `dist/`.
-- `src/controllers/users.controller.ts` is leftover code from an earlier version and is not connected to any route.
-- `jsonwebtoken` and `lodash` are listed as dependencies but are no longer used (only referenced in commented-out code in `middleware.ts`).
 
 ## Future Improvements
 
 - Add request validation with Zod or TypeBox
-- Configure CORS with an explicit trusted origin
-- Wait for MongoDB to connect before accepting requests
-- Add unique indexes for email and username
 - Add centralized error handling and a consistent error response format
 - Add rate limiting to authentication endpoints
 - Implement refresh tokens or server-side token revocation
